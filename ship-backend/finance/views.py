@@ -55,3 +55,4 @@ class MonthlyProfitViewSet(viewsets.ModelViewSet):
 class PartnerPayoutViewSet(viewsets.ModelViewSet):
     queryset = PartnerPayout.objects.all()
     serializer_class = PartnerPayoutSerializer
+

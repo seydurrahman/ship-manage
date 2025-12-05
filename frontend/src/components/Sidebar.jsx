@@ -105,7 +105,8 @@ const Sidebar = () => {
           </button>
 
           {openReports && (
-            <div className="pl-4 mt-2 space-y-1 text-left">
+            <div>
+              <div className="pl-4 mt-2 space-y-1 text-left">
               <Link
                 to="/partner-report"
                 className={`block px-2 py-1 rounded hover:bg-gray-100 transition ${
@@ -117,7 +118,22 @@ const Sidebar = () => {
                 Partner Share Report
               </Link>
             </div>
+            <div className="pl-4 mt-2 space-y-1 text-left">
+              <Link
+                to="/partner-slip"
+                className={`block px-2 py-1 rounded hover:bg-gray-100 transition ${
+                  location.pathname === "/partner-slip"
+                    ? "bg-blue-100 font-semibold text-blue-700"
+                    : ""
+                }`}
+              >
+                Partner Slip
+              </Link>
+            </div>
+            </div>
+            
           )}
+          
         </div>
       </nav>
     </aside>

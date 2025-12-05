@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 import PartnerReport from "./components/PartnerReport";
+import PartnerSlip from "./components/PartnerSlip";
 import ShipForm from "./components/forms/ShipForm";
 import ExpenseForm from "./components/forms/ExpenseForm";
 import ProjectForm from "./components/forms/ProjectForm";
 import PartnerForm from "./components/forms/PartnerForm";
 import DailyIncomeForm from "./components/forms/DailyIncomeForm";
+
 import "./App.css";
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
             <Route path="/partners" element={<PartnerForm />} />
             <Route path="/daily-income" element={<DailyIncomeForm />} />
             <Route path="/partner-report" element={<PartnerReport />} />
+            <Route path="/partner-slip" element={<PartnerSlip />} />
           </Routes>
         </main>
       </div>

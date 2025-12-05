@@ -12,5 +12,5 @@ router.register(r'profits', views.MonthlyProfitViewSet)
 router.register(r'payouts', views.PartnerPayoutViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),    # ✅ FIXED — remove "api/"
+    path('', include(router.urls)),
 ]
