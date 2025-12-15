@@ -2,25 +2,35 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
-  withCredentials: false, // No login yet
+  timeout: 5000,
+  headers: {
+    "Content-Type": "application/json",
+  }
+
+  
 });
+console.log("PROD URL:", import.meta.env.VITE_API_BASE_URL);
 
 export default api;
-
 
 
 // import axios from "axios";
 
 // const isDevelopment = import.meta.env.MODE === "development";
 
-// const baseURL = isDevelopment
-//   ? import.meta.env.VITE_API_BASE_URL_LOCAL
+// const myBaseURL = isDevelopment
+//   ? import.meta.env.VITE_API_BASE_URL
 //   : import.meta.env.VITE_API_BASE_URL_DEPLOY;
 
-
 // const api = axios.create({
-//   baseURL: "http://127.0.0.1:8000/api/",
-//   withCredentials: false,  // No login yet
+//   baseURL: myBaseURL,
+//   timeout: 5000,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   accept: "application/json",
+//   withCredentials: false, // No login yet
 // });
 
 // export default api;
+
