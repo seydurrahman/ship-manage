@@ -5,9 +5,11 @@ import api from "../../api/axios";
 export default function DailyIncomeForm() {
   const emptyForm = {
     ship: "",
-    amount: "",
     project: "",
     date: "",
+    sand_rate: "",
+    sands_amount:"",
+    amount: "",
     description: "",
     is_active: true,
   };
@@ -51,11 +53,9 @@ export default function DailyIncomeForm() {
   };
 
   const fetchProjects = async () => {
-  const res = await api.get("projects/");
-  setProjects(Array.isArray(res.data) ? res.data : res.data.results || []);
-};
-
-  
+    const res = await api.get("projects/");
+    setProjects(Array.isArray(res.data) ? res.data : res.data.results || []);
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -77,10 +77,12 @@ export default function DailyIncomeForm() {
 
   const handleEdit = (item) => {
     setFormData({
-      ship: item.ship || "",
-      project: item.project || "",
-      amount: item.amount,
+      ship: item.ship,
+      project: item.project,
       date: item.date,
+      sand_rate: item.sand_rate || "",
+      sands_amount:item.sands_amount ||"",
+      amount: item.amount,
       description: item.description || "",
       is_active: item.is_active,
     });
@@ -112,7 +114,11 @@ export default function DailyIncomeForm() {
       }
       amount = Math.round(amount * 100) / 100;
 
-      const payload = { ...formData, amount, project: formData.project || null };
+      const payload = {
+        ...formData,
+        amount,
+        project: formData.project || null,
+      };
 
       if (editingId) {
         await api.put(`incomes/${editingId}/`, payload);
@@ -189,6 +195,24 @@ export default function DailyIncomeForm() {
               </option>
             ))}
           </select>
+
+          <input
+            name="sand_rate"
+            type="text"
+            placeholder="Sand Rate"
+            className="w-full p-2 rounded bg-white/70 text-black"
+            value={formData.sand_rate}
+            onChange={handleChange}
+          />
+
+           <input
+            name="sands_amount"
+            type="text2"
+            placeholder="Sands Amount"
+            className="w-full p-2 rounded bg-white/70 text-black"
+            value={formData.sands_amount}
+            onChange={handleChange}
+          />
 
           <input
             name="amount"
@@ -274,7 +298,7 @@ export default function DailyIncomeForm() {
                       <th className="p-2 text-left">Date</th>
                       <th className="p-2 text-left">Ship</th>
                       <th className="p-2 text-left">Rate</th>
-                      <th className="p-2 text-left">Sands Amount</th>
+                      <th className="p-2 text-left">Sands</th>
                       <th className="p-2 text-left">Amount</th>
                       <th className="p-2 text-left">Description</th>
                       <th className="p-2 text-left">Status</th>
@@ -284,11 +308,14 @@ export default function DailyIncomeForm() {
                   <tbody>
                     {incomes.map((inc) => (
                       <tr key={inc.id} className="hover:bg-white/10">
+                        <td className="p-2">{inc.date}</td>
                         <td className="p-2">{getShipName(inc.ship)}</td>
+                        <td className="p-2">{inc.sand_rate}</td>
+                        <td className="p-2">{inc.sands_amount}</td>
                         <td className="p-2">
                           Tk {parseFloat(inc.amount || 0).toFixed(2)}
                         </td>
-                        <td className="p-2">{inc.date}</td>
+
                         <td className="p-2">
                           {inc.description?.slice(0, 40) || "-"}
                         </td>

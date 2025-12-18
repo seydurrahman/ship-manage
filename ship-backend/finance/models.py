@@ -39,19 +39,22 @@ class Project(models.Model):
         return f"{self.name} - {self.ship.name}"
 
 class DailyIncome(models.Model):
-    ship = models.ForeignKey(Ship, on_delete=models.CASCADE, related_name='daily_incomes')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='daily_incomes')
+    ship = models.ForeignKey(Ship, on_delete=models.CASCADE, related_name='daily_incomes')
     date = models.DateField()
+
+    sand_rate = models.CharField(max_length=100, blank=True, null=True)
+    sands_amount = models.CharField(max_length=100, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    notes = models.TextField(blank=True)
+
+    description = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         unique_together = ['ship', 'project', 'date']
         ordering = ['-date']
-    
-    def __str__(self):
-        return f"{self.ship.name} - {self.project.name} - {self.date}"
 
 class Expense(models.Model):
     EXPENSE_CATEGORIES = [
