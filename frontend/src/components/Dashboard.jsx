@@ -405,7 +405,7 @@ const Dashboard = () => {
                   <th className="px-3 py-2 text-right">Income</th>
                   <th className="px-3 py-2 text-right">Expenses</th>
                   <th className="px-3 py-2 text-right">Net Profit</th>
-                  <th className="px-3 py-2 text-center">Trend</th>
+                  <th className="px-3 py-2 text-center">Trend graph</th>
                 </tr>
               </thead>
               <tbody>{/* Your table rows here */}</tbody>
